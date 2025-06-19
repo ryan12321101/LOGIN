@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <title>Login</title>
+  <link rel="stylesheet" href="login.css">
+  <style>
+    body {
+      font-family: Arial;
+      background: #f4f4f4;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+    .box {
+      background: white;
+      padding: 30px;
+      border-radius: 10px;
+      width: 300px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      text-align: center;
+    }
+    input, button {
+      width: 90%;
+      padding: 10px;
+      margin-top: 10px;
+    }
+    label {
+      font-size: 10px;
+      display: block;
+      margin-top: 10px;
+    }
+    a {
+      display: block;
+      margin-top: 15px;
+      font-size: 14px;
+      text-decoration: none;
+      color: #007bff;
+    }
+    .erro {
+      color: red;
+      margin-top: 10px;
+      font-size: 14px;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="box">
+    <h2>Login</h2>
+    <input type="email" id="email" placeholder="Seu e-mail" required>
+    <input type="password" id="senha" placeholder="Sua senha" required>
+
+    <label>
+      <input type="checkbox" id="termos"> Confirmo que sou maior de 18 e aceito os termos
+    </label>
+
+    <button onclick="logar()">Entrar</button>
+    <a href="registro.html">Não tem conta? Registrar</a>
+    <div id="erro" class="erro"></div>
+  </div>
+
+  <script>
+    function logar() {
+      const email = document.getElementById("email").value.trim();
+      const senha = document.getElementById("senha").value;
+      const termos = document.getElementById("termos").checked;
+      const erro = document.getElementById("erro");
+
+      if (!email || !senha) {
+        erro.textContent = "Preencha todos os campos.";
+        return;
+      }
+
+      if (!termos) {
+        erro.textContent = "Você precisa aceitar os termos.";
+        return;
+      }
+
+      const user = JSON.parse(localStorage.getItem("usuario"));
+
+      if (!user) {
+        erro.textContent = "Usuário não encontrado. Faça o registro primeiro.";
+        return;
+      }
+
+      if (user.email === email && user.senha === senha) {
+        window.location.href = "https://rgewtgetbvdfas.github.io/potifolioreis/";
+      } else {
+        erro.textContent = "Email ou senha incorretos.";
+      }
+    }
+  </script>
+
+</body>
+</html>
