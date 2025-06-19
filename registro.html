@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <title>Registro</title>
+  <style>
+    body {
+      font-family: Arial;
+      background: #f4f4f4;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+    .box {
+      background: white;
+      padding: 30px;
+      border-radius: 10px;
+      width: 300px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+      text-align: center;
+    }
+    input, button {
+      width: 100%;
+      padding: 10px;
+      margin-top: 10px;
+    }
+    .erro {
+      color: red;
+      font-size: 14px;
+      margin-top: 10px;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="box">
+    <h2>Registro</h2>
+    <input type="email" id="email" placeholder="Digite seu e-mail" required>
+    <input type="password" id="senha" placeholder="Crie uma senha" required>
+    <button onclick="registrar()">Registrar</button>
+    <div id="erro" class="erro"></div>
+  </div>
+
+  <script>
+    function registrar() {
+      const email = document.getElementById("email").value.trim();
+      const senha = document.getElementById("senha").value;
+      const erro = document.getElementById("erro");
+
+      if (!email || !senha) {
+        erro.textContent = "Preencha todos os campos.";
+        return;
+      }
+
+      const usuario = { email, senha };
+      localStorage.setItem("usuario", JSON.stringify(usuario));
+
+      alert("Registro concluído! Faça login agora.");
+      window.location.href = "login.html";
+    }
+  </script>
+
+</body>
+</html>
